@@ -1,0 +1,26 @@
+[@Clear]
+[@PrintLevel] MAIN
+
+@@ ==============
+@@ Testing UPDATE
+@@ ==============
+
+[@NoOutput]
+CREATE TABLE t(id INT NOT NULL PRIMARY KEY, height FLOAT, nickname CHAR(20), num INT);
+
+[#Repeat] 20
+INSERT INTO t VALUES ($i, $i, $i, $i);
+
+UPDATE t SET num = 200;
+UPDATE t SET num = 100, height = 2.0 WHERE id <= 4 or id >= 18;
+UPDATE t SET height = 0 WHERE id >= 9.9 or id = 20;
+UPDATE t SET nickname = 'nickname' WHERE height = 0 or not (num = 200);
+UPDATE t SET id = 20 * 2 + 1 WHERE id = 20;
+
+[@NoOutput]
+
+SELECT * from t;
+
+[@NoOutput]
+DROP TABLE t;
+[@NoOutput]

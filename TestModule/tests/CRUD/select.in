@@ -1,0 +1,58 @@
+[@Clear]
+[@PrintLevel] MAIN
+
+[@NoOutput]
+CREATE TABLE t(id INT, name CHAR(50), age FLOAT, score INT);
+INSERT INTO t VALUES (1, 'hello', 20.0, 20);
+INSERT INTO t VALUES (2, 'world', 10.0, 230);
+[@NoOutput]
+
+@@ ========================
+@@ Select testing
+@@ ========================
+[@Print] Testing select\n
+
+SELECT * FROM t;
+[@Print]
+SELECT id FROM t;
+[@Print]
+SELECT age FROM t;
+[@Print]
+SELECT id, name FROM t;
+[@Print]
+SELECT id, name, age, score FROM t;
+[@Print]
+SELECT name, name, name FROM t;
+
+
+[@NoOutput]
+DROP TABLE t;
+CREATE TABLE t(id INT, name CHAR(50), age FLOAT, score INT);
+[#Repeat] 20
+INSERT INTO t VALUES ($i, $i, $i, $i);
+[@NoOutput]
+
+
+@@ =============
+@@ Testing WHERE
+@@ =============
+[@Print]
+SELECT * FROM t;
+[@Print]
+SELECT * FROM t WHERE id > 18;
+[@Print]
+SELECT * FROM t WHERE name = '2';
+[@Print]
+SELECT name FROM t WHERE score > 17.7;
+[@Print]
+SELECT name FROM t WHERE score > 17.7 or id < 5;
+[@Print]
+SELECT name FROM t WHERE score >= 17.0 and id >= 18;
+[@Print]
+SELECT name FROM t WHERE score >= 17.0 and not id >= 18;
+
+[@NoOutput]
+DROP TABLE t;
+[@NoOutput]
+
+
