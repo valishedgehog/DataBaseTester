@@ -1,0 +1,13 @@
+# Save only maven project
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+*.iml
+.idea/
+.eclipse
+
+TestModule/tests/temp/*
+TestModule/tests/*/results/*
