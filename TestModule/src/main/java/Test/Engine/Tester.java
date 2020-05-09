@@ -103,10 +103,10 @@ public class Tester {
     }
 
     public boolean test(String testName) {
-        boolean result = true;
+        ClientServerHelper.restartServer();
 
+        boolean result = true;
         ArrayList<Test> tests;
-        ArrayList<TesterRunner> runners = new ArrayList<>();
 
         try {
             tests = prepareTests(testName);
@@ -116,23 +116,12 @@ public class Tester {
         }
 
         for (Test test : tests) {
-            runners.add(new TesterRunner(test));
-        }
+            TestRunner testRunner = new TestRunner(test);
+            Printer.printTask("Running test <" + testRunner.getTestName() + ">");
 
-        try {
-            for (TesterRunner runner : runners) {
-                Printer.printTask("Running test <" + runner.getTestName() + ">");
-                runner.start();
+            testRunner.run();
 
-                runner.join();
-            }
-        } catch (InterruptedException e) {
-            Printer.printError(e);
-        }
-
-        Printer.printTask("Statuses statistic");
-        for (TesterRunner runner : runners) {
-            Printer.printTestStatistic(runner.getTestName(), runner.getStatusCounter().toString());
+            Printer.printTestStatistic(testRunner.getTestName(), testRunner.getStatusCounter().toString());
         }
 
         for (Test test : tests) {
@@ -142,8 +131,6 @@ public class Tester {
         }
 
         Printer.globalResetSystemOut();
-
-        ClientServerHelper.clearClients();
         return result;
     }
 

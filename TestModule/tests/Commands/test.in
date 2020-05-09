@@ -1,0 +1,20 @@
+[@Clear]
+
+[@PrintLevel] NONE
+[@PrintLevel] MAIN
+[@PrintLevel] EXTENDED
+
+[@Echo] Test echo function
+
+@@ Example commentary
+
+[@NoOutput]
+CREATE TABLE t(id INT);
+DROP TABLE t;
+[@NoOutput]
+
+[@RestartServer]
+
+[@Sleep] 2000
+
+[@Echo] ServerEnabled

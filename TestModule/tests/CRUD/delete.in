@@ -1,0 +1,24 @@
+[@Clear]
+[@PrintLevel] MAIN
+
+@@ ==============
+@@ Testing DELETE
+@@ ==============
+
+[@NoOutput]
+CREATE TABLE t(id INT NOT NULL PRIMARY KEY, height FLOAT, nickname CHAR(20), num INT);
+
+[#Repeat] 20
+INSERT INTO t VALUES ($i, $i, $i, $i);
+
+DELETE FROM t WHERE id = 1;
+DELETE FROM t WHERE id >= 18 and id <= 18;
+DELETE FROM t WHERE height = 15 and id = 15;
+
+[@NoOutput]
+
+SELECT * from t;
+
+[@NoOutput]
+DROP TABLE t;
+[@NoOutput]

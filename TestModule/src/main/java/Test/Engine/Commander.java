@@ -130,7 +130,7 @@ public class Commander {
                     .sorted(Comparator.reverseOrder())
                     .map(Path::toFile)
                     .forEach(file -> {
-                        if (!file.getName().equals("Server") && !file.getName().equals(workingDir)) {
+                        if (!file.getName().equals("DBServer") && !file.getName().equals(workingDir)) {
                             file.delete();
                         }
                     });
@@ -138,6 +138,8 @@ public class Commander {
             Printer.printCriticalError(e);
             Printer.printCriticalError(new DropDatabaseException());
         }
+
+        restartServer();
 
         if (printLevel == Commander.PRINT_LEVEL.EXTENDED) {
             Printer.printTestInfo("Database dropped");
@@ -176,8 +178,7 @@ public class Commander {
             Printer.printInfo("Killing server");
         }
 
-        ClientServerHelper.stopServer();
-        ClientServerHelper.startServer();
+        ClientServerHelper.restartServer();
     }
 
     private void restartServer(int time, int minTime) {

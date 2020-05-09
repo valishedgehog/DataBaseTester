@@ -1,5 +1,6 @@
 package Test.Engine;
 
+import Client.Client;
 import Test.Exceptions.ClientDownException;
 import Test.Utils.ClientServerHelper;
 import Test.Utils.Printer;
@@ -10,17 +11,19 @@ import Test.Utils.Statuses.StatusParser;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.Duration;
+import java.util.concurrent.*;
 
-public class TesterRunner extends Thread {
-    private final int clientId;
+public class TestRunner {
+    private final Client client;
     private final Test test;
     private final StatusCounter statusCounter;
 
-    public TesterRunner(Test test) {
+    public TestRunner(Test test) {
         this.test = test;
-        clientId = ClientServerHelper.registerClient();
+        client = ClientServerHelper.getClient();
 
-        if (clientId == -1) {
+        if (client == null) {
             Printer.printCriticalErrorAndExit(new ClientDownException());
         }
 
@@ -31,7 +34,6 @@ public class TesterRunner extends Thread {
         return test.getName();
     }
 
-    @Override
     public void run() {
         FileOutputStream statusStream;
         FileOutputStream resultStream;
@@ -52,16 +54,25 @@ public class TesterRunner extends Thread {
                 continue;
             }
 
-            while (ClientServerHelper.serverDown()) {
-                Printer.printTestInfo("Waiting client-server up...");
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            if (ClientServerHelper.serverDown()) {
+                client.disconnect();
+
+                ClientServerHelper.restartServer();
+
+                client.connect();
+
+                while (ClientServerHelper.serverDown()) {
+                    Printer.printTestInfo("Waiting client-server up...");
+
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
-            String answer = ClientServerHelper.communicate(clientId, query).trim();
+            String answer = communicate(query).trim();
             Status status = StatusParser.parse(query, answer);
             statusCounter.parse(status);
 
@@ -79,10 +90,33 @@ public class TesterRunner extends Thread {
             }
         }
 
-        ClientServerHelper.disconnectClient(clientId);
+        client.disconnect();
     }
 
     public StatusCounter getStatusCounter() {
         return statusCounter;
+    }
+
+    private String communicate(String msg) {
+        String result = "TimeoutException";
+        final Duration timeout = Duration.ofSeconds(1);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+
+        final Future<String> handler = executor.submit(() -> client.communicate(msg));
+
+        try {
+            result = handler.get(timeout.toMillis(), TimeUnit.MILLISECONDS);
+        } catch (TimeoutException e) {
+            handler.cancel(true);
+            ClientServerHelper.restartServer();
+            client.disconnect();
+            client.connect();
+        } catch (InterruptedException | ExecutionException e) {
+            Printer.printError(e);
+        }
+
+        executor.shutdownNow();
+
+        return result;
     }
 }
