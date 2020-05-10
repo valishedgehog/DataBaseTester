@@ -1,12 +1,18 @@
 package Test.Utils.Statuses;
 
 import Test.Utils.Printer;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Status {
+    @JsonProperty
     private String status;
+
+    @JsonProperty
     private final String command;
+
+    @JsonProperty
     private final String answer;
 
     public Status(String command, String answer) {

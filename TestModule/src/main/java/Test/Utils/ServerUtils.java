@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ClientServerHelper {
-    public static String SERVER_PATH = "~/DBServer";
-    public static final String PIDOF_SERVER = "pidof DBServer";
+    public static String SERVER_PATH = "~/Server";
+    public static final String PIDOF_SERVER = "pidof Server";
 
     public static void restartServer() {
         stopServer();
@@ -23,7 +23,8 @@ public class ClientServerHelper {
             ProcessBuilder processBuilder = new ProcessBuilder(RUN_SERVER);
             processBuilder.directory(new File(getServerWorkingDir()));
             processBuilder.start();
-        } catch (IOException e) {
+            Thread.sleep(1000);
+        } catch (IOException | InterruptedException e) {
             Printer.printCriticalError(e);
         }
     }
