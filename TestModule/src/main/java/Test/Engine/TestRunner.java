@@ -2,7 +2,7 @@ package Test.Engine;
 
 import Client.Client;
 import Test.Exceptions.ClientDownException;
-import Test.Utils.ClientServerHelper;
+import Test.Utils.ServerUtils;
 import Test.Utils.Printer;
 import Test.Utils.Statuses.Status;
 import Test.Utils.Statuses.StatusCounter;
@@ -18,10 +18,11 @@ public class TestRunner {
     private final Client client;
     private final Test test;
     private final StatusCounter statusCounter;
+    private Commander commands;
 
     public TestRunner(Test test) {
         this.test = test;
-        client = ClientServerHelper.getClient();
+        client = ServerUtils.getClient();
 
         if (client == null) {
             Printer.printCriticalErrorAndExit(new ClientDownException());
@@ -46,7 +47,7 @@ public class TestRunner {
             return;
         }
 
-        Commander commands = new Commander(resultStream);
+        commands = new Commander(resultStream, client);
 
         for (String query : test.getQueries()) {
             if (commands.isFrameworkCommand(query)) {
@@ -54,14 +55,10 @@ public class TestRunner {
                 continue;
             }
 
-            if (ClientServerHelper.serverDown()) {
-                client.disconnect();
+            if (ServerUtils.serverDown()) {
+                commands.parseFrameworkCommand(Commander.RESTART_SERVER_COMMAND);
 
-                ClientServerHelper.restartServer();
-
-                client.connect();
-
-                while (ClientServerHelper.serverDown()) {
+                while (ServerUtils.serverDown()) {
                     Printer.printTestInfo("Waiting client-server up...");
 
                     try {
@@ -99,23 +96,23 @@ public class TestRunner {
 
     private String communicate(String msg) {
         String result = "TimeoutException";
-        final Duration timeout = Duration.ofSeconds(1);
+        final Duration timeout = Duration.ofSeconds(30);
         ExecutorService executor = Executors.newSingleThreadExecutor();
-
         final Future<String> handler = executor.submit(() -> client.communicate(msg));
 
         try {
             result = handler.get(timeout.toMillis(), TimeUnit.MILLISECONDS);
         } catch (TimeoutException e) {
             handler.cancel(true);
-            ClientServerHelper.restartServer();
-            client.disconnect();
-            client.connect();
         } catch (InterruptedException | ExecutionException e) {
             Printer.printError(e);
+        } finally {
+            executor.shutdownNow();
         }
 
-        executor.shutdownNow();
+        if (result.equals("Connection lost") || result.equals("TimeoutException")) {
+            commands.parseFrameworkCommand(Commander.RESTART_SERVER_COMMAND);
+        }
 
         return result;
     }

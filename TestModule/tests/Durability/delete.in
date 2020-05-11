@@ -1,0 +1,27 @@
+[@Clear]
+[@PrintLevel] MAIN
+
+@@ =========================
+@@ Testing DURABILITY delete
+@@ =========================
+
+[@NoOutput]
+CREATE TABLE t(id INT, height FLOAT, nickname CHAR(20));
+[#Repeat] 200
+INSERT INTO t VALUES ($i, $i, $i);
+[@NoOutput]
+
+[@Print] Before restart
+SELECT * FROM t WHERE id = 1 or id = 200;
+
+[@RestartServer] 5 2
+
+[@NoOutput]
+BEGIN;
+[#Repeat] 200
+DELETE FROM t WHERE id = $i;
+COMMIT;
+[@NoOutput]
+
+[@Print] \nAfter restart
+SELECT * FROM t WHERE id = 1 or id = 200;

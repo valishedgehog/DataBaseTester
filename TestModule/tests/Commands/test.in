@@ -8,13 +8,12 @@
 
 @@ Example commentary
 
-[@NoOutput]
+[@RestartServer] 100 50
+[@Sleep] 5000
+
 CREATE TABLE t(id INT);
 DROP TABLE t;
-[@NoOutput]
 
 [@RestartServer]
-
-[@Sleep] 2000
-
-[@Echo] ServerEnabled
+CREATE TABLE t(id INT);
+DROP TABLE t;

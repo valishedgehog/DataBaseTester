@@ -1,0 +1,15 @@
+[@Clear]
+
+CREATE TABLE t(id INT, num INT);
+
+[#Repeat] 1000
+INSERT INTO t VALUES ($i, $i);
+
+[#Repeat] 1000
+UPDATE t SET id = $i WHERE num = $i;
+
+[#Repeat] 1000
+DELETE FROM t WHERE id = $i;
+
+DROP TABLE t;
+

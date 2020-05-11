@@ -2,7 +2,7 @@ package Test.Engine.Cli;
 
 import Client.ClientRunner;
 import Test.Engine.Tester;
-import Test.Utils.ClientServerHelper;
+import Test.Utils.ServerUtils;
 import Test.Utils.Printer;
 
 import java.io.File;
@@ -128,6 +128,6 @@ public class TestCliEngine {
     }
 
     public boolean client() {
-        return new ClientRunner().run(ClientServerHelper.PORT);
+        return new ClientRunner().run(ServerUtils.PORT);
     }
 }

@@ -48,27 +48,31 @@ public class Client {
     public String communicate(String query) {
         StringBuilder result = new StringBuilder();
 
-        try {
-            outputStream.write(query.getBytes());
-            outputStream.flush();
+        String[] queries = query.split("\n");
+        for (String q : queries) {
+            try {
+                outputStream.write(q.trim().getBytes());
+                outputStream.flush();
 
-            if (query.equals("exit;")) {
+                if (q.equals("exit;")) {
+                    disconnect();
+                    System.exit(0);
+                }
+
+                while (inputStream.available() <= 0) ;
+
+                byte[] buffer = new byte[BUFFER_SIZE];
+
+                while (inputStream.available() > 0) {
+                    inputStream.read(buffer);
+                    result.append(new String(buffer).trim());
+                    buffer = new byte[BUFFER_SIZE];
+                }
+            } catch (IOException e) {
+                errorStream.println(e.getMessage());
+                result = new StringBuilder("Connection lost");
                 disconnect();
-                System.exit(0);
             }
-
-            while (inputStream.available() <= 0 && !Thread.currentThread().isInterrupted()) { }
-
-            byte[] buffer = new byte[BUFFER_SIZE];
-
-            while (inputStream.available() > 0) {
-                inputStream.read(buffer);
-                result.append(new String(buffer));
-            }
-        } catch (IOException e) {
-            errorStream.println(e.getMessage());
-            result = new StringBuilder("Connection lost");
-            disconnect();
         }
 
         return result.toString().trim();

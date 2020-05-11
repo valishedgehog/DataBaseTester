@@ -1,0 +1,9 @@
+Before restart
+id |height    |nickname|
+1  |1.000000  |'1'     |
+200|200.000000|'200'   |
+
+After restart
+id |height    |nickname|
+1  |1.000000  |'1'     |
+200|200.000000|'200'   |

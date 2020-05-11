@@ -1,7 +1,8 @@
 package Test.Engine;
 
+import Client.Client;
 import Test.Exceptions.DropDatabaseException;
-import Test.Utils.ClientServerHelper;
+import Test.Utils.ServerUtils;
 import Test.Utils.Printer;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -26,11 +27,13 @@ public class Commander {
 
     private PRINT_LEVEL printLevel = PRINT_LEVEL.MAIN;
     private boolean noOutput = false;
+    private final Client client;
 
     private final FileOutputStream outputStream;
 
-    public Commander(FileOutputStream outputStream) {
+    public Commander(FileOutputStream outputStream, Client client) {
         this.outputStream = outputStream;
+        this.client = client;
     }
 
     public boolean isFrameworkCommand(String cmd) {
@@ -125,12 +128,12 @@ public class Commander {
 
     private void clearCommand() {
         try {
-            String workingDir = ClientServerHelper.getServerWorkingDir();
+            String workingDir = ServerUtils.getServerWorkingDir();
             Files.walk(Paths.get(workingDir))
                     .sorted(Comparator.reverseOrder())
                     .map(Path::toFile)
                     .forEach(file -> {
-                        if (!file.getName().equals("DBServer") && !file.getName().equals(workingDir)) {
+                        if (!file.getName().equals("Server") && !file.getName().equals(workingDir)) {
                             file.delete();
                         }
                     });
@@ -138,8 +141,6 @@ public class Commander {
             Printer.printCriticalError(e);
             Printer.printCriticalError(new DropDatabaseException());
         }
-
-        restartServer();
 
         if (printLevel == Commander.PRINT_LEVEL.EXTENDED) {
             Printer.printTestInfo("Database dropped");
@@ -161,6 +162,16 @@ public class Commander {
 
     // [@RestartServer]
 
+    private void killServer() {
+        client.disconnect();
+        ServerUtils.stopServer();
+    }
+
+    private void startServer() {
+        ServerUtils.startServer();
+        client.connect();
+    }
+
     private void restartServer(String cmd) {
         cmd = cmd.replace(RESTART_SERVER_COMMAND, "").trim();
         String[] args = cmd.split(" ");
@@ -175,10 +186,15 @@ public class Commander {
 
     private void restartServer() {
         if (printLevel == PRINT_LEVEL.EXTENDED) {
-            Printer.printInfo("Killing server");
+            Printer.printInfo("Restarting server");
         }
 
-        ClientServerHelper.restartServer();
+        killServer();
+        startServer();
+
+        if (printLevel == PRINT_LEVEL.EXTENDED) {
+            Printer.printInfo("Server restarted");
+        }
     }
 
     private void restartServer(int time, int minTime) {

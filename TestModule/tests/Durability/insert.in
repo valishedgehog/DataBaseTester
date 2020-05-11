@@ -1,0 +1,27 @@
+[@Clear]
+[@PrintLevel] MAIN
+
+@@ =========================
+@@ Testing DURABILITY insert
+@@ =========================
+
+[@NoOutput]
+CREATE TABLE t(id INT, height FLOAT, nickname CHAR(20));
+INSERT INTO t VALUES (1, 150.0, 'hedgehog');
+INSERT INTO t VALUES (2, 120.0, 'linux');
+[@NoOutput]
+
+[@Print] Before restart
+SELECT * FROM t;
+
+[@RestartServer] 5 2
+
+[@NoOutput]
+BEGIN;
+[#Repeat] 200
+INSERT INTO t VALUES($i, $i, '$i');
+COMMIT;
+[@NoOutput]
+
+[@Print] \nAfter restart
+SELECT * FROM t;

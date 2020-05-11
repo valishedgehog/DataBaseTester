@@ -1,0 +1,9 @@
+Before restart
+id|height    |nickname  |
+1 |150.000000|'hedgehog'|
+2 |120.000000|'linux'   |
+
+After restart
+id|height    |nickname  |
+1 |150.000000|'hedgehog'|
+2 |120.000000|'linux'   |

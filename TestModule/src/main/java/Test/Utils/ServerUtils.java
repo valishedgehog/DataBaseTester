@@ -2,27 +2,26 @@ package Test.Utils;
 
 import Client.Client;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class ClientServerHelper {
+public class ServerUtils {
     public static String SERVER_PATH = "~/Server";
-    public static final String PIDOF_SERVER = "pidof Server";
-
-    public static void restartServer() {
-        stopServer();
-        startServer();
-    }
+    public static int PORT = 18666;
 
     public static void startServer() {
         final String RUN_SERVER = String.format("%s", SERVER_PATH);
 
         try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
             ProcessBuilder processBuilder = new ProcessBuilder(RUN_SERVER);
             processBuilder.directory(new File(getServerWorkingDir()));
+            processBuilder.redirectOutput(new File("/home/anton/logs/Server.log." + dtf.format(now)));
+            processBuilder.redirectError(new File("/home/anton/logs/Server.err." + dtf.format(now)));
             processBuilder.start();
+
             Thread.sleep(1000);
         } catch (IOException | InterruptedException e) {
             Printer.printCriticalError(e);
@@ -30,18 +29,19 @@ public class ClientServerHelper {
     }
 
     public static void stopServer() {
-        final String KILL_SERVER = String.format("kill -KILL $(%s)", PIDOF_SERVER);
+        final String[] KILL_SERVER = new String[] {"kill", "-KILL", String.valueOf(getServerPID())};
 
         try {
             Runtime.getRuntime().exec(KILL_SERVER);
-        } catch (IOException e) {
+            Thread.sleep(1000);
+        } catch (IOException | InterruptedException e) {
             Printer.printCriticalError(e);
         }
     }
 
     private static int getServerPID() {
         try {
-            Process process = Runtime.getRuntime().exec(PIDOF_SERVER);
+            Process process = Runtime.getRuntime().exec(new String[] {"pidof", "Server"});
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             while (process.isAlive()) ;
 
@@ -64,11 +64,6 @@ public class ClientServerHelper {
     public static String getServerWorkingDir() {
         return String.valueOf(new File(SERVER_PATH).toPath().getParent());
     }
-
-
-    // ClientHelper
-
-    public static int PORT = 18666;
 
     public static Client getClient() {
         Client client = new Client(PORT, Printer.getEmptyPrintStream(), Printer.getEmptyPrintStream());

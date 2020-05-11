@@ -1,7 +1,7 @@
 package Test.Engine;
 
 import Test.Exceptions.TestWrongResultException;
-import Test.Utils.ClientServerHelper;
+import Test.Utils.ServerUtils;
 import Test.Utils.Configuration;
 import Test.Utils.Printer;
 
@@ -19,9 +19,9 @@ public class Tester {
     public Tester() {
         configuration = Configuration.load();
         preprocessor = new Preprocessor();
-        ClientServerHelper.SERVER_PATH = configuration.getServerExecutable();
-        ClientServerHelper.PORT = configuration.getPort();
-        ClientServerHelper.startServer();
+        ServerUtils.SERVER_PATH = configuration.getServerExecutable();
+        ServerUtils.PORT = configuration.getPort();
+        ServerUtils.startServer();
     }
 
     public Configuration getConfiguration() {
@@ -103,8 +103,6 @@ public class Tester {
     }
 
     public boolean test(String testName) {
-        ClientServerHelper.restartServer();
-
         boolean result = true;
         ArrayList<Test> tests;
 
@@ -163,10 +161,7 @@ public class Tester {
 
         if (preprocessor.isFrameworkCommand(line) || preprocessor.isPreprocessorCommand(line)) return line;
 
-        boolean isTransaction = false;
-        if (line.startsWith("BEGIN TRANSACTION")) {
-            isTransaction = true;
-        }
+        boolean isTransaction = line.startsWith("BEGIN");
 
         StringBuilder query = new StringBuilder();
         query.append(line).append(isTransaction ? "\n" : " ");

@@ -23,13 +23,13 @@ INSERT INTO t VALUES (11, 10.9, 'qqqwww');
 INSERT INTO t(id, height) VALUES (12, 10);
 INSERT INTO t(height, nickname, id) VALUES(20.0, 'asdfkljasdf', 13);
 
-@@ TimeOut
+@@ Иногда вылетает TimeOut
 INSERT INTO t(id, nickname) VALUES (14, 'eoeoe');
 
-@@ TimeOut
+@@ Иногда вылетает TimeOut
 INSERT INTO t(id, nickname) VALUES (15, 'qweqwe');
 
-@@ Expected no timeout, but timeout
+@@ Ожидается отсутствие TimeOut, но рандом
 INSERT INTO t VALUES (16, 170.0, 'hello');
 
 [@Print]
@@ -39,11 +39,14 @@ DROP TABLE t;
 
 [@Print]
 [@Clear]
+[@RestartServer]
 [@NoOutput]
 CREATE TABLE t(id INT PRIMARY KEY NOT NULL, height FLOAT, nickname CHAR(50));
 [@NoOutput]
-@@ No timeout after clean
+
+@@ Гарантировать отсутствие TimeOut может только очистка и перезапуск сервера
 INSERT INTO t VALUES (16, 170.0, 'hello');
+
 [@NoOutput]
 DROP TABLE t;
 [@NoOutput]
