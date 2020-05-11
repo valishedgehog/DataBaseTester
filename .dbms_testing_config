@@ -1,6 +1,6 @@
 {
     "testsFolder": "/home/anton/Workspace/DataBaseTester/TestModule/tests",
-    "serverExecutable": "/home/anton/Workspace/DBServer/DBServer",
+    "serverExecutable": "/home/anton/Workspace/SelSQL/Server/Server",
     "port": 18666
 }
 

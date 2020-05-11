@@ -1,31 +1,41 @@
 # DBMS testing framework
 
-For running testing framework on Linux systems use ```run.sh``` script in project root folder:
+Testing framework for SelSQL.
+
+## Ubuntu dependencies
+
+#### Build SelSQL
+```bash
+git clone https://github.com/hehogcode/SelSQL.git
+sudo apt install gcc g++ cmake bison flex libboost-dev -y
+cd SelSQL
+cmake CMakeList.txt
+make
+```
+
+#### Build DataBaseTester
 
 ```bash
-./run.sh build
-./run.sh test
+git clone https://github.com/hehogcode/DataBaseTester.git
+sudo apt install openjdk-8-jdk maven
+cd DataBaseTester
+mvn clean install
 ```
-It will create a config file ```~/.dbms_tests_config```
-Please, check the path to the root directory with the tests in the configuration file. By default, the path should point to ```$PROJECT_ROOT/TestModule/tests/```
 
-To main function (class Main.java) MUST be passed 1 argument: full path to projects root directory (script run.sh will do it automatically)
-
-If you want to run certain tests and get the result (only true or false), you can use the special syntax: With this syntax you can execute any framework command (but without output).
+#### Run DataBaseTester
 ```bash
-./run.sh test run testname1 testname2 ...
-./run.sh test run all
-./run.sh test list
+java -jar TestModule/target/Tester.jar
+```
+## Configuration
+Example config file:
+```
+{
+    "testsFolder": "/home/anton/Workspace/DataBaseTester/TestModule/tests",
+    "serverExecutable": "/home/anton/Workspace/SelSQL/Server/Server",
+    "port": 18666
+}
 ```
 
-TODO: Script for Windows
-
-For running on Windows or without script, pass as program argument absolute path to project directory
-
-For example:
-```
-java -jar Test-1.0.0-jar-with-dependencies.jar C:\Workspace\DataBaseManagingSystem\
-```
 ## Tests structure
 
 Example of test folder:
@@ -68,9 +78,6 @@ run testname1 testname2
 run all
 ```
 
-- ### ```prun``` command
-Like ```run```, but in parallel mode.
-
 - ### ```ls``` command
 Aliases: ```list```, ```lst```, ```dir```
 
@@ -104,6 +111,9 @@ del testname1 testname2
 Aliases: ```cls```
 
 Clears the screen of terminal. Not all of terminals are supported. Check if your terminal supports ANSI escape codes.
+
+- ### ```client``` command
+Run client for SelSQL
 
 - ### ```exit``` command
 Aliases: ```quit```
@@ -164,3 +174,6 @@ Restart client server. Has 3 variations:
 3) Reboots the server at a random time in the interval MINTIME..TIME asynchronously from the main thread.
 
 Use 2 and 3 variant with ```[@WaitServer]```
+
+- ### ```[@Print] SOME TEXT```
+Print something to output file
