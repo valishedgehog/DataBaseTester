@@ -1,0 +1,48 @@
+[@PrintLevel] MAIN
+
+@@ ================|
+@@ Database errors |
+@@ ================|
+
+[@Clear]
+[@NoOutput]
+CREATE TABLE t(id INT);
+[@NoOutput]
+CREATE TABLE t(id INT);
+
+[@Clear]
+CREATE TABLE t(id INT, id1 FLOAT NOT NULL NOT NULL);
+
+[@Clear]
+CREATE TABLE t(id INT, id CHAR(20));
+
+[@Clear]
+[@NoOutput]
+CREATE TABLE t(id INT UNIQUE);
+INSERT INTO t VALUES(1);
+INSERT INTO t VALUES(2);
+INSERT INTO t VALUES(3);
+[@NoOutput]
+INSERT INTO t VALUES(1);
+UPDATE t SET id = 1 WHERE id = 3;
+SELECT * FROM t JOIN t1 on t.id = t1.id;
+
+[@Clear]
+[@NoOutput]
+CREATE TABLE t(id INT, num FLOAT NOT NULL);
+[@NoOutput]
+INSERT INTO t(id) VALUES(1);
+INSERT INTO t(id, id) VALUES(2, 2);
+INSERT INTO tt VALUES(1, 2);
+INSERT INTO t VALUES(1, 2, 3);
+INSERT INTO t VALUES(99999999999999999999999, 1);
+INSERT INTO t(id, temp) VALUES(1, 2);
+INSERT INTO t VALUES(1, 1, 1);
+INSERT INTO t VALUES('asdasd', 123);
+UPDATE t SET num = null WHERE id = 1;
+
+[@Clear]
+[@NoOutput]
+CREATE TABLE t(id INT, s CHAR(5));
+[@NoOutput]
+INSERT INTO t VALUES(1, 'qweasdzxc');

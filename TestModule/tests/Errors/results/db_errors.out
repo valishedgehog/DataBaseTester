@@ -1,0 +1,16 @@
+Table already exists ERROR: 1
+Constraint already exists ERROR: 3
+Field name already used ERROR: 4
+Value already exists, use UNIQUE value ERROR: 9
+Value already exists, use UNIQUE value ERROR: 9
+Table doesn`t exist ERROR: 2
+Null values unavailable ERROR: 8
+Same column in request ERROR: 7
+Table doesn`t exist ERROR: 2
+Invalid count of columns and values ERROR: 5
+Int oversize (Str num 1, sym num 41): 99999999999999999999999
+Field doesnt exist ERROR: 6
+Invalid count of columns and values ERROR: 5
+Value is out of range OR is not a number ERROR: 12
+Null values unavailable ERROR: 8
+CHAR IS VERY BIG ERROR: 13

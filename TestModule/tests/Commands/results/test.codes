@@ -1,0 +1,4 @@
+{"status":"OK","command":"CREATE TABLE t(id INT);","answer":"Success"}
+{"status":"OK","command":"DROP TABLE t;","answer":"Success"}
+{"status":"OK","command":"CREATE TABLE t(id INT);","answer":"Success"}
+{"status":"OK","command":"DROP TABLE t;","answer":"Success"}

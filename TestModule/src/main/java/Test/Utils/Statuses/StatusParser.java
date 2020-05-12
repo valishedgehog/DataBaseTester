@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 public class StatusParser {
     public enum Statuses {OK, DB_ERROR, PARSER_ERROR, CONNECTION_LOST, TIMEOUT_EXCEPTION}
 
-    private static final String DB_ERROR_REGEX = "^*ERROR: (\\d)+$";
-    private static final String PARSER_ERROR_REGEX = "^syntax error*";
+    private static final String DB_ERROR_REGEX = "^.*ERROR: (\\d)+$";
+    private static final String PARSER_ERROR_REGEX = "^syntax error, .*$";
     private static final String CONNECTION_LOST_REGEX = "^Connection lost$";
     private static final String TIMEOUT_EXCEPTION_REGEX = "^TimeoutException$";
 

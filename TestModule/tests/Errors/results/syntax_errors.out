@@ -1,0 +1,37 @@
+syntax error, unexpected IDENT (Str num 1, sym num 18): asdasdqweqweqsdsad
+syntax error, unexpected NUMBER (Str num 1, sym num 11): 12312312312
+syntax error, unexpected RBRACKET, expecting IDENT (Str num 1, sym num 14): )
+syntax error, unexpected IDENT (Str num 1, sym num 5): CREAT
+syntax error, unexpected IDENT, expecting TABLE or INDEX (Str num 1, sym num 12): TABLEE
+syntax error, unexpected NUMBER, expecting IDENT (Str num 1, sym num 14): 555
+syntax error, unexpected IDENT, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 19): INNT
+syntax error, unexpected IDENT, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 20): CHARR
+syntax error, unexpected $undefined, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 43): CHAR(99999999999999999999)
+syntax error, unexpected IDENT, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 29): CHAR99999999
+syntax error, unexpected NUMBER, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 23): 456456
+syntax error, unexpected IDENT, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 27): CHAR
+syntax error, unexpected SEMICOLON, expecting RBRACKET or COMMA (Str num 1, sym num 21): ;
+syntax error, unexpected IDENT (Str num 1, sym num 3): DRO
+syntax error, unexpected COMMA, expecting SEMICOLON (Str num 1, sym num 11): ,
+syntax error, unexpected IDENT, expecting TABLE (Str num 1, sym num 10): TABLET
+syntax error, unexpected IDENT (Str num 1, sym num 5): SHOWW
+syntax error, unexpected IDENT, expecting CREATE_ACTION (Str num 1, sym num 11): CREATEE
+syntax error, unexpected LBRACKET, expecting IDENT (Str num 1, sym num 16): (
+syntax error, unexpected STRVAL, expecting IDENT (Str num 1, sym num 14): 'tt'
+syntax error, unexpected IDENT (Str num 1, sym num 7): INSERTT
+syntax error, unexpected IDENT, expecting INTO (Str num 1, sym num 11): INTOO
+syntax error, unexpected NUMBER, expecting IDENT (Str num 1, sym num 13): 1
+syntax error, unexpected IDENT, expecting VALUES (Str num 1, sym num 23): VALUEES
+syntax error, unexpected LBRACKET, expecting VALUES (Str num 1, sym num 17): (
+syntax error, unexpected SEMICOLON, expecting LBRACKET (Str num 1, sym num 18): ;
+syntax error, unexpected RBRACKET (Str num 1, sym num 19): )
+syntax error, unexpected IDENT, expecting INTO (Str num 1, sym num 7): t
+syntax error, unexpected JOIN, expecting IDENT (Str num 1, sym num 18): join
+syntax error, unexpected SEMICOLON (Str num 1, sym num 19): ;
+syntax error, unexpected IDENT, expecting UNION or INTERSECT or SEMICOLON (Str num 1, sym num 17): JOINN
+syntax error, unexpected IDENT, expecting UNION or INTERSECT or SEMICOLON (Str num 1, sym num 16): UNON
+syntax error, unexpected IDENT, expecting UNION or INTERSECT or SEMICOLON (Str num 1, sym num 13): A
+syntax error, unexpected IDENT (Str num 1, sym num 23): t
+syntax error, unexpected IDENT, expecting UNION or INTERSECT or SEMICOLON (Str num 1, sym num 20): INTERSET
+syntax error, unexpected SEMICOLON, expecting SELECT_ACTION (Str num 1, sym num 18): ;
+syntax error, unexpected INSERT_ACTION, expecting SELECT_ACTION (Str num 1, sym num 27): INSERT

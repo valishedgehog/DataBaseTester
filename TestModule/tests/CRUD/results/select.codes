@@ -1,0 +1,13 @@
+{"status":"OK","command":"SELECT * FROM t;","answer":"id|name   |age      |score|\n1 |'hello'|20.000000|20   |\n2 |'world'|10.000000|230  |"}
+{"status":"OK","command":"SELECT id FROM t;","answer":"id|\n1 |\n2 |"}
+{"status":"OK","command":"SELECT age FROM t;","answer":"age      |\n20.000000|\n10.000000|"}
+{"status":"OK","command":"SELECT id, name FROM t;","answer":"id|name   |\n1 |'hello'|\n2 |'world'|"}
+{"status":"OK","command":"SELECT id, name, age, score FROM t;","answer":"id|name   |age      |score|\n1 |'hello'|20.000000|20   |\n2 |'world'|10.000000|230  |"}
+{"status":"OK","command":"SELECT name, name, name FROM t;","answer":"name   |name   |name   |\n'hello'|'hello'|'hello'|\n'world'|'world'|'world'|"}
+{"status":"OK","command":"SELECT * FROM t;","answer":"id|name|age      |score|\n1 |'1' |1.000000 |1    |\n2 |'2' |2.000000 |2    |\n3 |'3' |3.000000 |3    |\n4 |'4' |4.000000 |4    |\n5 |'5' |5.000000 |5    |\n6 |'6' |6.000000 |6    |\n7 |'7' |7.000000 |7    |\n8 |'8' |8.000000 |8    |\n9 |'9' |9.000000 |9    |\n10|'10'|10.000000|10   |\n11|'11'|11.000000|11   |\n12|'12'|12.000000|12   |\n13|'13'|13.000000|13   |\n14|'14'|14.000000|14   |\n15|'15'|15.000000|15   |\n16|'16'|16.000000|16   |\n17|'17'|17.000000|17   |\n18|'18'|18.000000|18   |\n19|'19'|19.000000|19   |\n20|'20'|20.000000|20   |"}
+{"status":"OK","command":"SELECT * FROM t WHERE id > 18;","answer":"id|name|age      |score|\n19|'19'|19.000000|19   |\n20|'20'|20.000000|20   |"}
+{"status":"OK","command":"SELECT * FROM t WHERE name = '2';","answer":"id|name|age     |score|\n2 |'2' |2.000000|2    |"}
+{"status":"OK","command":"SELECT name FROM t WHERE score > 17.7;","answer":"name|\n'18'|\n'19'|\n'20'|"}
+{"status":"OK","command":"SELECT name FROM t WHERE score > 17.7 or id < 5;","answer":"name|\n'1' |\n'2' |\n'3' |\n'4' |\n'18'|\n'19'|\n'20'|"}
+{"status":"OK","command":"SELECT name FROM t WHERE score >= 17.0 and id >= 18;","answer":"name|\n'18'|\n'19'|\n'20'|"}
+{"status":"OK","command":"SELECT name FROM t WHERE score >= 17.0 and not id >= 18;","answer":"name|\n'17'|"}

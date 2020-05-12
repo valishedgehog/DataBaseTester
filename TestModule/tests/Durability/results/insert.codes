@@ -1,0 +1,2 @@
+{"status":"OK","command":"SELECT * FROM t;","answer":"id|height    |nickname  |\n1 |150.000000|'hedgehog'|\n2 |120.000000|'linux'   |"}
+{"status":"OK","command":"SELECT * FROM t;","answer":"id|height    |nickname  |\n1 |150.000000|'hedgehog'|\n2 |120.000000|'linux'   |"}

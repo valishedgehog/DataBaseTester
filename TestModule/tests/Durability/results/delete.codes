@@ -1,0 +1,2 @@
+{"status":"OK","command":"SELECT * FROM t WHERE id = 1 or id = 200;","answer":"id |height    |nickname|\n1  |1.000000  |'1'     |\n200|200.000000|'200'   |"}
+{"status":"OK","command":"SELECT * FROM t WHERE id = 1 or id = 200;","answer":"id |height    |nickname|\n1  |1.000000  |'1'     |\n200|200.000000|'200'   |"}

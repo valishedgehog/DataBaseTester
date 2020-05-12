@@ -1,0 +1,6 @@
+{"status":"OK","command":"SHOW CREATE TABLE t;","answer":"CREATE TABLE t(id INT PRIMARY KEY NOT NULL, name CHAR(50));"}
+{"status":"OK","command":"SHOW CREATE TABLE t;","answer":"CREATE TABLE t(id INT PRIMARY KEY UNIQUE NOT NULL, name CHAR(50));"}
+{"status":"OK","command":"SHOW CREATE TABLE t;","answer":"CREATE TABLE t(id INT PRIMARY KEY NOT NULL UNIQUE, name CHAR(50));"}
+{"status":"OK","command":"SHOW CREATE TABLE t;","answer":"CREATE TABLE t(id INT UNIQUE, name CHAR(50));"}
+{"status":"OK","command":"SHOW CREATE TABLE t;","answer":"CREATE TABLE t(id INT UNIQUE, name CHAR(50) NOT NULL);"}
+{"status":"OK","command":"SHOW CREATE TABLE t;","answer":"CREATE TABLE t(id INT, name CHAR(50), age FLOAT, score INT);"}

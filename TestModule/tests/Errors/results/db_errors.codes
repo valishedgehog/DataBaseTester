@@ -1,0 +1,16 @@
+{"status":"DB_ERROR","command":"CREATE TABLE t(id INT);","answer":"Table already exists ERROR: 1"}
+{"status":"DB_ERROR","command":"CREATE TABLE t(id INT, id1 FLOAT NOT NULL NOT NULL);","answer":"Constraint already exists ERROR: 3"}
+{"status":"DB_ERROR","command":"CREATE TABLE t(id INT, id CHAR(20));","answer":"Field name already used ERROR: 4"}
+{"status":"DB_ERROR","command":"INSERT INTO t VALUES(1);","answer":"Value already exists, use UNIQUE value ERROR: 9"}
+{"status":"DB_ERROR","command":"UPDATE t SET id = 1 WHERE id = 3;","answer":"Value already exists, use UNIQUE value ERROR: 9"}
+{"status":"DB_ERROR","command":"SELECT * FROM t JOIN t1 on t.id = t1.id;","answer":"Table doesn`t exist ERROR: 2"}
+{"status":"DB_ERROR","command":"INSERT INTO t(id) VALUES(1);","answer":"Null values unavailable ERROR: 8"}
+{"status":"DB_ERROR","command":"INSERT INTO t(id, id) VALUES(2, 2);","answer":"Same column in request ERROR: 7"}
+{"status":"DB_ERROR","command":"INSERT INTO tt VALUES(1, 2);","answer":"Table doesn`t exist ERROR: 2"}
+{"status":"DB_ERROR","command":"INSERT INTO t VALUES(1, 2, 3);","answer":"Invalid count of columns and values ERROR: 5"}
+{"status":"OK","command":"INSERT INTO t VALUES(99999999999999999999999, 1);","answer":"Int oversize (Str num 1, sym num 41): 99999999999999999999999"}
+{"status":"DB_ERROR","command":"INSERT INTO t(id, temp) VALUES(1, 2);","answer":"Field doesnt exist ERROR: 6"}
+{"status":"DB_ERROR","command":"INSERT INTO t VALUES(1, 1, 1);","answer":"Invalid count of columns and values ERROR: 5"}
+{"status":"DB_ERROR","command":"INSERT INTO t VALUES('asdasd', 123);","answer":"Value is out of range OR is not a number ERROR: 12"}
+{"status":"DB_ERROR","command":"UPDATE t SET num = null WHERE id = 1;","answer":"Null values unavailable ERROR: 8"}
+{"status":"DB_ERROR","command":"INSERT INTO t VALUES(1, 'qweasdzxc');","answer":"CHAR IS VERY BIG ERROR: 13"}

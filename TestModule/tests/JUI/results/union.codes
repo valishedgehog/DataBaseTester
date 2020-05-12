@@ -1,0 +1,8 @@
+{"status":"OK","command":"SELECT * FROM t1 UNION SELECT * FROM t2;","answer":"id|f1       |f2       |\n1 |22.000000|55.000000|\n2 |5.600000 |5.600000 |\n3 |44.000000|50.000000|\n1 |3.400000 |5.600000 |\n3 |9.000000 |99.000000|"}
+{"status":"OK","command":"SELECT * FROM t1 UNION SELECT * FROM t2 UNION SELECT f1, f2 FROM t3;","answer":"f1       |f2       |\n77.000000|2.000000 |\n66.000000|2.000000 |\n11.000000|2.000000 |\n1        |22.000000|\n2        |5.600000 |\n3        |44.000000|\n1        |3.400000 |\n3        |9.000000 |"}
+{"status":"OK","command":"SELECT id, f2 FROM t2 UNION SELECT id, f2 FROM t3;","answer":"id|f2       |\n1 |2.000000 |\n2 |2.000000 |\n3 |2.000000 |\n1 |55.000000|\n2 |5.600000 |\n3 |50.000000|"}
+{"status":"OK","command":"SELECT * FROM t1 UNION SELECT * FROM t2;","answer":"id|f1       |f2       |\n1 |22.000000|55.000000|\n2 |5.600000 |5.600000 |\n3 |44.000000|50.000000|\n1 |3.400000 |5.600000 |\n3 |9.000000 |99.000000|"}
+{"status":"OK","command":"SELECT id, f1 FROM t1 UNION SELECT f1 FROM t2 UNION SELECT f2, f1 FROM t3;","answer":"f1       |f2      |\n77.000000|2.000000|\n66.000000|2.000000|\n11.000000|2.000000|"}
+{"status":"OK","command":"SELECT * FROM t1 UNION SELECT * FROM t2 UNION SELECT * FROM t3;","answer":"id|f1       |f2       |\n1 |77.000000|2.000000 |\n2 |66.000000|2.000000 |\n3 |11.000000|2.000000 |\n1 |22.000000|55.000000|\n2 |5.600000 |5.600000 |\n3 |44.000000|50.000000|\n1 |3.400000 |5.600000 |\n3 |9.000000 |99.000000|"}
+{"status":"OK","command":"SELECT f2 FROM t1 INTERSECT SELECT f2 FROM t2;","answer":"f2      |\n5.600000|\n5.600000|\n5.600000|"}
+{"status":"OK","command":"SELECT * FROM t1 INTERSECT SELECT * FROM t2 INTERSECT SELECT * FROM t3;","answer":"id|f1      |f2      |\n4 |4.000000|4.000000|"}

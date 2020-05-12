@@ -1,0 +1,37 @@
+{"status":"PARSER_ERROR","command":"asdasdqweqweqsdsad;","answer":"syntax error, unexpected IDENT (Str num 1, sym num 18): asdasdqweqweqsdsad"}
+{"status":"PARSER_ERROR","command":"12312312312;","answer":"syntax error, unexpected NUMBER (Str num 1, sym num 11): 12312312312"}
+{"status":"PARSER_ERROR","command":"CREATE TABLE t ();","answer":"syntax error, unexpected RBRACKET, expecting IDENT (Str num 1, sym num 14): )"}
+{"status":"PARSER_ERROR","command":"CREAT TABLE t (id INT);","answer":"syntax error, unexpected IDENT (Str num 1, sym num 5): CREAT"}
+{"status":"PARSER_ERROR","command":"CREATE TABLEE t (id INT);","answer":"syntax error, unexpected IDENT, expecting TABLE or INDEX (Str num 1, sym num 12): TABLEE"}
+{"status":"PARSER_ERROR","command":"CREATE TABLE 555 (id INT);","answer":"syntax error, unexpected NUMBER, expecting IDENT (Str num 1, sym num 14): 555"}
+{"status":"PARSER_ERROR","command":"CREATE TABLE t (id INNT);","answer":"syntax error, unexpected IDENT, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 19): INNT"}
+{"status":"PARSER_ERROR","command":"CREATE TABLE t (id CHARR(50));","answer":"syntax error, unexpected IDENT, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 20): CHARR"}
+{"status":"PARSER_ERROR","command":"CREATE TABLE t (name CHAR(99999999999999999999));","answer":"syntax error, unexpected $undefined, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 43): CHAR(99999999999999999999)"}
+{"status":"PARSER_ERROR","command":"CREATE TABLE t (name CHAR99999999(20));","answer":"syntax error, unexpected IDENT, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 29): CHAR99999999"}
+{"status":"PARSER_ERROR","command":"CREATE TABLE t (name 456456);","answer":"syntax error, unexpected NUMBER, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 23): 456456"}
+{"status":"PARSER_ERROR","command":"CREATE TABLE t (name INT, nn CHAR);","answer":"syntax error, unexpected IDENT, expecting INT_TYPE or FLOAT_TYPE or CHAR_TYPE (Str num 1, sym num 27): CHAR"}
+{"status":"PARSER_ERROR","command":"CREATE TABLE t (name INT;","answer":"syntax error, unexpected SEMICOLON, expecting RBRACKET or COMMA (Str num 1, sym num 21): ;"}
+{"status":"PARSER_ERROR","command":"DRO TABLE t;","answer":"syntax error, unexpected IDENT (Str num 1, sym num 3): DRO"}
+{"status":"PARSER_ERROR","command":"DROP TABLE t, y;","answer":"syntax error, unexpected COMMA, expecting SEMICOLON (Str num 1, sym num 11): ,"}
+{"status":"PARSER_ERROR","command":"DROP TABLET t;","answer":"syntax error, unexpected IDENT, expecting TABLE (Str num 1, sym num 10): TABLET"}
+{"status":"PARSER_ERROR","command":"SHOWW CREATE TABLE t;","answer":"syntax error, unexpected IDENT (Str num 1, sym num 5): SHOWW"}
+{"status":"PARSER_ERROR","command":"SHOW CREATEE TABLE t;","answer":"syntax error, unexpected IDENT, expecting CREATE_ACTION (Str num 1, sym num 11): CREATEE"}
+{"status":"PARSER_ERROR","command":"SHOW CREATE TABLE (t);","answer":"syntax error, unexpected LBRACKET, expecting IDENT (Str num 1, sym num 16): ("}
+{"status":"PARSER_ERROR","command":"INSERT INTO 'tt' VALUES(1);","answer":"syntax error, unexpected STRVAL, expecting IDENT (Str num 1, sym num 14): 'tt'"}
+{"status":"PARSER_ERROR","command":"INSERTT INTO t VALUES(1);","answer":"syntax error, unexpected IDENT (Str num 1, sym num 7): INSERTT"}
+{"status":"PARSER_ERROR","command":"INSERT INTOO t VALUES(1);","answer":"syntax error, unexpected IDENT, expecting INTO (Str num 1, sym num 11): INTOO"}
+{"status":"PARSER_ERROR","command":"INSERT INTO t(1);","answer":"syntax error, unexpected NUMBER, expecting IDENT (Str num 1, sym num 13): 1"}
+{"status":"PARSER_ERROR","command":"INSERT INTO t(col) VALUEES;","answer":"syntax error, unexpected IDENT, expecting VALUES (Str num 1, sym num 23): VALUEES"}
+{"status":"PARSER_ERROR","command":"INSERT INTO t(col) (5);","answer":"syntax error, unexpected LBRACKET, expecting VALUES (Str num 1, sym num 17): ("}
+{"status":"PARSER_ERROR","command":"INSERT INTO t VALUES;","answer":"syntax error, unexpected SEMICOLON, expecting LBRACKET (Str num 1, sym num 18): ;"}
+{"status":"PARSER_ERROR","command":"INSERT INTO t VALUES();","answer":"syntax error, unexpected RBRACKET (Str num 1, sym num 19): )"}
+{"status":"PARSER_ERROR","command":"INSERT t VALUES(7);","answer":"syntax error, unexpected IDENT, expecting INTO (Str num 1, sym num 7): t"}
+{"status":"PARSER_ERROR","command":"SELECT * FROM t AS join tt on t.id = tt.id;","answer":"syntax error, unexpected JOIN, expecting IDENT (Str num 1, sym num 18): join"}
+{"status":"PARSER_ERROR","command":"SELECT * FROM t JOIN tt;","answer":"syntax error, unexpected SEMICOLON (Str num 1, sym num 19): ;"}
+{"status":"PARSER_ERROR","command":"SELECT * FROM t JOINN tt on t.id = tt.id;","answer":"syntax error, unexpected IDENT, expecting UNION or INTERSECT or SEMICOLON (Str num 1, sym num 17): JOINN"}
+{"status":"PARSER_ERROR","command":"SELECT * FROM t UNON SELECT * FROM t1;","answer":"syntax error, unexpected IDENT, expecting UNION or INTERSECT or SEMICOLON (Str num 1, sym num 16): UNON"}
+{"status":"PARSER_ERROR","command":"SELECT * FROM t A t1 JOIN tt on t.id = tt.id;","answer":"syntax error, unexpected IDENT, expecting UNION or INTERSECT or SEMICOLON (Str num 1, sym num 13): A"}
+{"status":"PARSER_ERROR","command":"SELECT * FROM t AS t1 JOIN tt t.id = tt.id;","answer":"syntax error, unexpected IDENT (Str num 1, sym num 23): t"}
+{"status":"PARSER_ERROR","command":"SELECT * FROM t INTERSET SELECT * FROM t1;","answer":"syntax error, unexpected IDENT, expecting UNION or INTERSECT or SEMICOLON (Str num 1, sym num 20): INTERSET"}
+{"status":"PARSER_ERROR","command":"SELECT * FROM t UNION;","answer":"syntax error, unexpected SEMICOLON, expecting SELECT_ACTION (Str num 1, sym num 18): ;"}
+{"status":"PARSER_ERROR","command":"SELECT * FROM t INTERSECT INSERT INTO t VALUES(1);","answer":"syntax error, unexpected INSERT_ACTION, expecting SELECT_ACTION (Str num 1, sym num 27): INSERT"}
