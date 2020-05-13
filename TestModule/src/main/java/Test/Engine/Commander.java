@@ -60,6 +60,7 @@ public class Commander {
 
 
     // [@Print] command
+
     private void print(String cmd) {
         try {
             String result = StringEscapeUtils.unescapeJava(cmd.replace(PRINT_COMMAND, "").trim());
@@ -68,6 +69,7 @@ public class Commander {
             Printer.printError(e);
         }
     }
+
 
     // [@PrintLevel] command
 

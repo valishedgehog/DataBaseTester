@@ -173,7 +173,5 @@ Restart client server. Has 3 variations:
 2) Reboots the server at a random moment in time interval 0..TIME asynchronously from the main thread.
 3) Reboots the server at a random time in the interval MINTIME..TIME asynchronously from the main thread.
 
-Use 2 and 3 variant with ```[@WaitServer]```
-
 - ### ```[@Print] SOME TEXT```
 Print something to output file

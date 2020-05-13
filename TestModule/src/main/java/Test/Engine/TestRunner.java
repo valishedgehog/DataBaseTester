@@ -96,7 +96,7 @@ public class TestRunner {
 
     private String communicate(String msg) {
         String result = "TimeoutException";
-        final Duration timeout = Duration.ofSeconds(30);
+        final Duration timeout = Duration.ofSeconds(20);
         ExecutorService executor = Executors.newSingleThreadExecutor();
         final Future<String> handler = executor.submit(() -> client.communicate(msg));
 

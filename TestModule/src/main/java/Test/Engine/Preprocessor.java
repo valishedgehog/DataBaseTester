@@ -24,9 +24,8 @@ public class Preprocessor {
         return new ArrayList<>();
     }
 
-    // #########################
+
     // [#Repeat] command
-    // #########################
 
     public ArrayList<String> repeatQuery(String cmd, String query) {
         ArrayList<String> queries = new ArrayList<>();
